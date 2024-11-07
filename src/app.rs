@@ -8,7 +8,6 @@ use charming::{
     series::Line,
     Chart,
 };
-#[cfg(feature = "hydrate")]
 use js_sys::Function;
 
 use crate::error_template::{AppError, ErrorTemplate};
@@ -74,7 +73,6 @@ fn Chart() -> impl IntoView {
                 return `${value[0].data} Charming`;
             "#,
         ));
-
         let chart = Chart::new()
             .x_axis(
                 Axis::new()
@@ -83,7 +81,7 @@ fn Chart() -> impl IntoView {
             )
             .tooltip(
                 Tooltip::new()
-                    .formatter(tooltip.into())
+                    .formatter(tooltip)
                     .trigger(Trigger::Axis)
                     .axis_pointer(
                         AxisPointer::new().type_(AxisPointerType::Shadow).label(
